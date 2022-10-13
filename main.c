@@ -1,42 +1,52 @@
-#include<stdio.h>
+#include <stdio.h>
+#include<math.h>
+#include<stdlib.h>
+int main () {
+    int hp_player=100;
+    int hp_dragon=100;
+    int d[5]={};
+    while(hp_player>0&&hp_dragon>0)
+    {
+        for(int i=0;i<6;i++)//get the array
+        {
+            scanf("%d",&d[i]);
+        }
+        if((d[0]+d[1]+d[2])%2!=0)//If the sum is odd, the player attacks
+        {
+            if(d[3]<d[4]&&d[4]<d[5])//If the score of d4, d5 and d6 are in ascending order,
+            {
+                hp_dragon-=25;
+            }// a critical hit.
+            else if(d[3]%2==d[4]%2||d[4]%2==d[5]%2)
+            {
+                hp_dragon-=5;
+            }
+        }
+        else//Otherwise, the dragon attacks.
+        {
+            //critical
+            if(abs(d[3]-d[4])>d[5])
+            {
+                hp_player-=15;
+            }
+            else if(d[3]+d[4]!=d[5])
+            {
+                hp_player-=5;
+            }
 
-int main (void) {
-    int d1,d2,d3,d4,d5,d6;
-    //do
-    //{
-        scanf("%d %d %d %d %d %d",&d1,&d2,&d3,&d4,&d5,&d6);
-    //}
-    //while(d1<1||d1>6||d2<1||d2>6||d3<1||d3>6||d4<1||d4>6||d5<1||d5>6||d6<1||d6>6);
-    if(d1+d2+d3<=10)//the player attacks
-    {
-        if(d4==d5&&d5==d6)
-        {
-            printf("Player attacks: Critical Hit\n");
-        }
-        else if(d4+d5>=d6)
-        {
-             printf("Player attacks: Normal Hit\n");
-        }
-        else
-        {
-             printf("Player attacks: Miss\n");
-        
         }
     }
-    else//the dragon attacks.
+
+    if(hp_player>hp_dragon)
     {
-        if(d4==d5||d4==d6||d5==d6)
-        {
-            printf("Dragon attacks: Miss\n");
-        }
-        else if(d4+d5!=d6)
-        {
-            printf("Dragon attacks: Normal Hit\n");
-        }
-        else
-        {
-            printf("Dragon attacks: Critical Hit\n");
-        }
+        printf("Player wins\n");
     }
+    else
+    {
+        printf("Dragon wins\n");
+    }
+
+
+
     return 0;
 }
