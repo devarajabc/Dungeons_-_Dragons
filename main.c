@@ -1,52 +1,31 @@
-#include <stdio.h>
-#include<math.h>
-#include<stdlib.h>
-int main () {
-    int hp_player=100;
-    int hp_dragon=100;
-    int d[6]={};
-    while(hp_player>0&&hp_dragon>0)
-    {
-        for(int i=0;i<6;i++)//get the array
-        {
-            scanf("%d",&d[i]);
-        }
-        if((d[0]+d[1]+d[2])%2!=0)//If the sum is odd, the player attacks
-        {
-            if(d[3]<d[4]&&d[4]<d[5])//If the score of d4, d5 and d6 are in ascending order,
-            {
-                hp_dragon-=25;
-            }// a critical hit.
-            else if(d[3]%2==d[4]%2||d[4]%2==d[5]%2)
-            {
-                hp_dragon-=5;
-            }
-        }
-        else//Otherwise, the dragon attacks.
-        {
-            //critical
-            if(abs(d[3]-d[4])>d[5])
-            {
-                hp_player-=15;
-            }
-            else if(d[3]+d[4]!=d[5])
-            {
-                hp_player-=5;
-            }
+#include<stdio.h>
+int main(void)
+{
+    unsigned long long NUMBER_1 = 0x38E38E38E38E3800LLU;
+    unsigned long long NUMBER_2 = 0x2AAAAAAAAAAAAAAALLU;
+    unsigned long long NUMBER_3 = 0x1C71C71C71C71C71LLU;
+    int d=0;
+    unsigned long long temp=0;
+  /*(d1 * NUMBER_1 + d2 * NUMBER_2 + d3 * NUMBER_3) mod 0x7CE66C50E2840000LLU*/
+  /*(a + b) % c = ((a % c) + (b % c)) % c */
+  for(int i=0;i<4;i++)
+  {
+      if(i<3) {
+          scanf("%d", &d);
+      }
+      switch (i) {
+          case 0:
+              temp+=(d * NUMBER_1)%0x7CE66C50E2840000LLU; break;//累加
+          case 1:
+              temp+=(d * NUMBER_2)%0x7CE66C50E2840000LLU; break;//累加
+          case 2:
+              temp+=(d * NUMBER_3)%0x7CE66C50E2840000LLU; break;
+          case 3:
+              printf("%llu\n",temp%0x7CE66C50E2840000LLU);break;
+          default:
+              break;
+                }
 
-        }
-    }
-
-    if(hp_player>hp_dragon)
-    {
-        printf("Player wins\n");
-    }
-    else
-    {
-        printf("Dragon wins\n");
-    }
-
-
-
+  }
     return 0;
 }
