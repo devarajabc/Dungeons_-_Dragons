@@ -4,7 +4,7 @@
 int main () {
     int hp_player=100;
     int hp_dragon=100;
-    int d[5]={};
+    int d[6]={};
     while(hp_player>0&&hp_dragon>0)
     {
         for(int i=0;i<6;i++)//get the array
